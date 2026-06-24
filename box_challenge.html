@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang='ko'><head><meta charset='UTF-8'><title>박스 챌린지</title>
+<style>
+body{text-align:center;font-family:sans-serif;background:#222;color:white}
+#game{position:relative;width:800px;height:500px;margin:auto;background:#333;border:2px solid white}
+#box{position:absolute;background:tomato;cursor:pointer}
+</style></head><body>
+<h1>🎯 박스 챌린지</h1>
+<h2 id='info'>Level 1</h2>
+<div id='game'><div id='box'></div></div>
+<script>
+let level=1,size=100,timeLimit=3000,timer;
+const box=document.getElementById("box");
+const info=document.getElementById("info");
+function placeBox(){
+clearTimeout(timer);
+box.style.width=size+"px";
+box.style.height=size+"px";
+box.style.left=Math.random()*(700-size)+"px";
+box.style.top=Math.random()*(400-size)+"px";
+info.innerText="Level "+level+" | 제한시간 "+(timeLimit/1000).toFixed(1)+"초";
+timer=setTimeout(()=>{alert("게임오버! 최고 레벨:"+level);location.reload();},timeLimit);
+}
+box.onclick=()=>{
+level++;
+size=Math.max(20,size-5);
+timeLimit=Math.max(500,timeLimit-100);
+placeBox();
+}
+placeBox();
+</script></body></html>
